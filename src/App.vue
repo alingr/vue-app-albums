@@ -1,28 +1,28 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <img :src="image" width="100" height="100">
+    <b-table striped hover :items="albums" :fields="fields"></b-table>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from "axios";
+import image from "./assets/logo.png"
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      albums: [],
+      fields: ['album_id', 'title', 'artist', 'genre', 'label', 'songs', 'year'],
+      image,
+    };
+  },
+  mounted() {
+    axios
+      .get("https://albums-collection-service.herokuapp.com/albums")
+      .then((response) => {
+        this.albums = response.data;
+      });
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

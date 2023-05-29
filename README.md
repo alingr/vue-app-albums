@@ -1,5 +1,7 @@
 # vue-app-albums
 
+This Vue.js app provides a UI for interacting with [albums API](https://albums-collection-service.herokuapp.com/api-docs)
+
 ## Project setup
 ```
 npm install
